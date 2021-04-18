@@ -1,0 +1,28 @@
+.app{
+    width: 95%;
+    padding-top: $separacion/2;
+    margin: 0 auto;
+
+    .tabs{
+        @include tablet{
+            @include grid(3, 2rem);
+        }
+        button{
+            background-color: $blanco;
+            padding: 1rem;
+            font-size: 1.4rem;
+            font-weight: $bold;
+            border: none;
+            text-align: center;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+    }
+    .seccion{
+        display: none;
+        margin-top: $separacion/2;
+        &:nth-of-type(1){
+            display: block;
+        }
+    }
+}
