@@ -1,0 +1,24 @@
+body{
+    background-color: $negro;
+}
+.contenedor-estetica{
+    @include tablet{
+        height: 100vh;
+        @include grid(2, $separacion/2);
+    }
+    
+    .imagen{
+        height: 30rem;
+        background-image: url(../../../build/img/1.webp);
+        background-size: cover;
+        background-position: center center;
+        @include tablet{
+            height: 100vh;
+        }
+    }
+    .app{
+       width: 95%;
+       padding: $separacion/4;
+       margin: 0 auto;
+    }
+}
