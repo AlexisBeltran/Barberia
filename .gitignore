@@ -1,0 +1,4 @@
+# Ignorar carpeta node_modules
+node_modules
+# Para descartar toda la carpeta
+src/**/*
