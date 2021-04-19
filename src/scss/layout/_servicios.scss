@@ -19,5 +19,12 @@
             font-weight: $bold;
             margin: 0;
         }
+
+        &.seleccionado{
+            background-color: $azul;
+            p{
+                color: $blanco;
+            }
+        }
     }
 }

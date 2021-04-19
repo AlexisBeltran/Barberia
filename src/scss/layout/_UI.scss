@@ -13,7 +13,7 @@ body{
         background-size: cover;
         background-position: center center;
         @include tablet{
-            height: 100vh;
+            height: auto;
         }
     }
     .app{
