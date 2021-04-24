@@ -17,6 +17,9 @@
             text-transform: uppercase;
             cursor: pointer;
         }
+        .actual{
+            background-color: $azul;
+        }
     }
     .seccion{
         display: none;

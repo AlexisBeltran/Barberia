@@ -14,6 +14,11 @@ function IniciarApp(){
 function mostrarSeccion(){
     const PaginaActual = document.querySelector(`#paso-${Pagina}`);
     PaginaActual.classList.add('mostrar-seccion');
+    //Eliminando clase actual
+    document.querySelector(`[data-paso="${Pagina}"]`).classList.remove('actual');
+    //Resaltar TAB actual 
+    const TabActual = document.querySelector(`[data-paso="${Pagina}"]`);
+    TabActual.classList.add('actual');
 }
 
 function ocultarSeccion(){
@@ -26,6 +31,11 @@ function ocultarSeccion(){
             document.querySelector('.mostrar-seccion').classList.remove('mostrar-seccion');
             const Seccion = document.querySelector(`#paso-${Pagina}`);
             Seccion.classList.add('mostrar-seccion');
+            //Eliminar la clase actual del tab anterior
+            document.querySelector('.tabs .actual').classList.remove('actual');
+            const Tab = document.querySelector(`[data-paso="${Pagina}"]`);
+            //Agregar la clase actual al tab
+            Tab.classList.add('actual');
         });
     });
 }
