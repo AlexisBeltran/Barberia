@@ -1,11 +1,34 @@
+//Id de data-set button
+let Pagina = 1;
+
 document.addEventListener('DOMContentLoaded', () =>{
     IniciarApp();
 });
 
 function IniciarApp(){
     mostrarServicios();
+    mostrarSeccion();
+    ocultarSeccion();
 }
 
+function mostrarSeccion(){
+    const PaginaActual = document.querySelector(`#paso-${Pagina}`);
+    PaginaActual.classList.add('mostrar-seccion');
+}
+
+function ocultarSeccion(){
+    const Botones = document.querySelectorAll('.tabs button');
+    Botones.forEach( boton =>{
+        boton.addEventListener('click', e => {
+            e.preventDefault();
+            Pagina = parseInt(e.target.dataset.paso);
+            //Eliminando Seccion 
+            document.querySelector('.mostrar-seccion').classList.remove('mostrar-seccion');
+            const Seccion = document.querySelector(`#paso-${Pagina}`);
+            Seccion.classList.add('mostrar-seccion');
+        });
+    });
+}
 async function mostrarServicios(){
     try{
         const Archivo = './servicios.json';
