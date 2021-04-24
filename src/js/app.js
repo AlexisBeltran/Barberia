@@ -73,7 +73,7 @@ async function mostrarServicios(){
             divServicio.onclick = seleccionarServicio;
             //Inyectar precio y nombre al div servicio
             divServicio.appendChild(nombreServicio);
-            divServicio.appendChild(precioServicio);
+            divServicio.appendChild(precioServicio); //E
             //Inyectarlo en el HTML
             document.querySelector('#servicios').appendChild(divServicio);
         });
