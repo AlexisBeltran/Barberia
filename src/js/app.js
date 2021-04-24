@@ -1,5 +1,12 @@
 //Id de data-set button
+//Variables globales
 let Pagina = 1;
+const Cita = {
+    nombre: '',
+    fecha: '',
+    hora: '',
+    servicio: []
+}
 
 document.addEventListener('DOMContentLoaded', () =>{
     IniciarApp();
@@ -12,6 +19,7 @@ function IniciarApp(){
     paginaSiguiente();
     paginaAnterior();
     botonPaginador();
+    MostrarResumen();
 }
 
 function mostrarSeccion(){
@@ -130,4 +138,18 @@ function botonPaginador(){
         paginaSiguiente.classList.remove('ocultar');
     }
     mostrarSeccion(); //Cambia la sección que se muestra por la de la pagina
+}
+
+function MostrarResumen(){
+    //Destructuring
+    const {nombre, fecha, hora, servicio } = Cita;
+    const Resumen = document.querySelector('.mostrar-servicios');
+    //Validacion del objeto
+    if(Object.values(Cita).includes('')){
+        console.log('El objeto esta vacio');
+        const AdventenciaResumen = document.createElement('P');
+        AdventenciaResumen.classList.add('invalidar-cita');
+        AdventenciaResumen.textContent = 'Faltan datos de Servicio, Hora, Fecha o Nombre';
+        Resumen.appendChild(AdventenciaResumen);
+    }
 }
