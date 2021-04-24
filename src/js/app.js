@@ -9,6 +9,9 @@ function IniciarApp(){
     mostrarServicios();
     mostrarSeccion();
     ocultarSeccion();
+    paginaSiguiente();
+    paginaAnterior();
+    botonPaginador();
 }
 
 function mostrarSeccion(){
@@ -85,5 +88,38 @@ function seleccionarServicio(e){
         Elemento.classList.remove('seleccionado');
     }else{
         Elemento.classList.add('seleccionado');
+    }
+}
+
+function paginaSiguiente(){
+    const Siguiente = document.querySelector('#siguiente');
+    Siguiente.addEventListener('click', (e) =>{
+        e.preventDefault();
+        Pagina++;
+        botonPaginador();
+    });
+}
+
+function paginaAnterior(){
+    const Anterior = document.querySelector('#anterior');
+    Anterior.addEventListener('click', (e) =>{
+        e.preventDefault();
+        Pagina--;
+        botonPaginador();
+    });
+}
+
+function botonPaginador(){
+    const paginaAnterior = document.querySelector('#anterior');
+    const paginaSiguiente = document.querySelector('#siguiente');
+    if(Pagina === 1){
+        paginaAnterior.classList.add('ocultar');
+    }
+    else if(Pagina === 2){
+        paginaAnterior.classList.remove('ocultar');
+        paginaSiguiente.classList.remove('ocultar');
+    }
+    else if(Pagina === 3){
+        paginaSiguiente.classList.add('ocultar');
     }
 }
