@@ -15,6 +15,19 @@ function IniciarApp(){
 }
 
 function mostrarSeccion(){
+    //Eliminando Seccion 
+    //Comprobamos si existe esa clase
+    const seccionAnterior = document.querySelector('.mostrar-seccion');
+    if(seccionAnterior){
+        document.querySelector('.mostrar-seccion').classList.remove('mostrar-seccion');
+    }
+    //Eliminar la clase actual del tab anterior
+    //Comprobamos si existe esa clase
+    const tabAnterior =  document.querySelector('.tabs .actual');
+    if(tabAnterior){
+        document.querySelector('.tabs .actual').classList.remove('actual');
+    }
+    //Agregamos la clase mostrar seccion mediante el id de pagina
     const PaginaActual = document.querySelector(`#paso-${Pagina}`);
     PaginaActual.classList.add('mostrar-seccion');
     //Eliminando clase actual
@@ -30,15 +43,8 @@ function ocultarSeccion(){
         boton.addEventListener('click', e => {
             e.preventDefault();
             Pagina = parseInt(e.target.dataset.paso);
-            //Eliminando Seccion 
-            document.querySelector('.mostrar-seccion').classList.remove('mostrar-seccion');
-            const Seccion = document.querySelector(`#paso-${Pagina}`);
-            Seccion.classList.add('mostrar-seccion');
-            //Eliminar la clase actual del tab anterior
-            document.querySelector('.tabs .actual').classList.remove('actual');
-            const Tab = document.querySelector(`[data-paso="${Pagina}"]`);
-            //Agregar la clase actual al tab
-            Tab.classList.add('actual');
+            mostrarSeccion();
+            botonPaginador();
         });
     });
 }
@@ -104,7 +110,7 @@ function paginaAnterior(){
     const Anterior = document.querySelector('#anterior');
     Anterior.addEventListener('click', (e) =>{
         e.preventDefault();
-        Pagina--;
+        Pagina--; 
         botonPaginador();
     });
 }
@@ -115,11 +121,13 @@ function botonPaginador(){
     if(Pagina === 1){
         paginaAnterior.classList.add('ocultar');
     }
-    else if(Pagina === 2){
+    else if(Pagina === 3){
+        paginaAnterior.classList.remove('ocultar');
+        paginaSiguiente.classList.add('ocultar');
+    }
+    else{
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.remove('ocultar');
     }
-    else if(Pagina === 3){
-        paginaSiguiente.classList.add('ocultar');
-    }
+    mostrarSeccion(); //Cambia la sección que se muestra por la de la pagina
 }
