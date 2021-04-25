@@ -16,6 +16,19 @@
             border: none;
             border-radius: 1rem;
         }
+        
     }
 
+    .error-nombre{
+        display: none;
+        p{
+            color: $rojo;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        &.mensaje{
+            display: block;
+        }
+    }
+    
 }

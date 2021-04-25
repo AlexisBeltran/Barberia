@@ -20,6 +20,7 @@ function IniciarApp(){
     paginaAnterior();
     botonPaginador();
     MostrarResumen();
+    nombreCita();
 }
 
 function mostrarSeccion(){
@@ -172,4 +173,30 @@ function MostrarResumen(){
         AdventenciaResumen.textContent = 'Faltan datos de Servicio, Hora, Fecha o Nombre';
         Resumen.appendChild(AdventenciaResumen);
     }
+}
+
+function nombreCita(){
+    const nombreInput = document.querySelector('#nombre');
+    const ErrorNombre = document.querySelector('.error-nombre');
+    nombreInput.addEventListener('input', (e) =>{
+        const nombreTexto = e.target.value.trim();
+        if(nombreTexto === '' || nombreTexto.length < 3){
+            const MensajeAlerta = document.querySelector('.mensaje');
+            if(MensajeAlerta){
+                return;
+            }
+            ErrorNombre.classList.add('mensaje');
+            setTimeout(() =>{
+                ErrorNombre.classList.remove('mensaje');
+            }, 8000);
+        }
+        else{
+            const Mensaje = document.querySelector('.mensaje');
+            if(Mensaje){
+                ErrorNombre.classList.remove('mensaje');
+            }
+            Cita.nombre = nombreTexto;
+            console.log(Cita);
+        }
+    });
 }
