@@ -21,6 +21,7 @@ function IniciarApp(){
     botonPaginador();
     MostrarResumen();
     nombreCita();
+    validarFecha();
 }
 
 function mostrarSeccion(){
@@ -198,5 +199,37 @@ function nombreCita(){
             Cita.nombre = nombreTexto;
             console.log(Cita);
         }
+    });
+}
+function mostrarAlerta(mensaje, tipo){
+    const ErrorMensaje = document.querySelector('.error');
+    if(ErrorMensaje){
+        Mensaje.remove();
+    }
+    const Formulario = document.querySelector('.formulario');
+    const Mensaje = document.createElement('DIV');
+    Mensaje.textContent = mensaje;
+    Mensaje.classList.add('alerta');
+    Formulario.appendChild(Mensaje);
+    if(tipo === 'error'){
+        Mensaje.classList.add('error');
+    }
+    setTimeout(() =>{
+        Mensaje.remove();
+    }, 8000);
+}
+function validarFecha(){
+    const fecha = document.querySelector('#fecha');
+    fecha.addEventListener('input', e => {
+        const dia = new Date(e.target.value).getUTCDay();
+        if([0, 6].includes(dia)){
+            e.preventDefault();
+            fecha.value = '';
+            mostrarAlerta('Sabado y Domingo no disponible', 'error');
+        }
+        else{
+            Cita.fecha = fecha.value;
+        }
+        
     });
 }

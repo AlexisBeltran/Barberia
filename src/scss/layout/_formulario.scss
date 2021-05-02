@@ -30,5 +30,16 @@
             display: block;
         }
     }
-    
+    .alerta{
+        padding: $separacion/2;
+        text-align: center;
+        text-transform: uppercase;
+
+        &.error{
+            background-color: rgb(195, 0, 0);
+        }
+        &.aceptado{
+            background-color: $verde;
+        }
+    }
 }
