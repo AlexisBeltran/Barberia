@@ -22,6 +22,7 @@ function IniciarApp(){
     MostrarResumen();
     nombreCita();
     validarFecha();
+    DeshabilitarFecha();
 }
 
 function mostrarSeccion(){
@@ -216,8 +217,29 @@ function mostrarAlerta(mensaje, tipo){
     }
     setTimeout(() =>{
         Mensaje.remove();
-    }, 8000);
+    }, 4000);
 }
+
+function DeshabilitarFecha(){
+    let Mes_, Dia_;
+    const Fecha = new Date();
+    const Anio = Fecha.getFullYear();
+    const Mes = Fecha.getMonth() + 1;
+    const Dia = Fecha.getDate();
+
+    if(Mes < 10 && Dia < 10){
+        Mes_ = `0${Mes}`
+        Dia_ = `0${Dia}`
+    }else{
+        Mes_ = Mes.toString();
+        Dia_ = Dia.toString();
+    }   
+
+    let FechaActual = `${Anio}-${Mes_}-${Dia_}`;
+
+    document.querySelector('#fecha').setAttribute('min', FechaActual);
+}
+
 function validarFecha(){
     const fecha = document.querySelector('#fecha');
     fecha.addEventListener('input', e => {
@@ -230,6 +252,7 @@ function validarFecha(){
         else{
             Cita.fecha = fecha.value;
         }
-        
+
     });
 }
+
