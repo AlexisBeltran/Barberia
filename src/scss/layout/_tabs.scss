@@ -17,12 +17,15 @@
             text-transform: uppercase;
             cursor: pointer;
         }
+        .actual{
+            background-color: $azul;
+        }
     }
     .seccion{
         display: none;
         margin-top: $separacion/2;
-        &:nth-of-type(1){
-            display: block;
-        }
     }
+}
+.mostrar-seccion{
+    display: block !important;
 }
