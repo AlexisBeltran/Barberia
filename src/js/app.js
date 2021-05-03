@@ -22,6 +22,7 @@ function IniciarApp(){
     MostrarResumen();
     nombreCita();
     fechaCita();
+    DeshabilitarFecha();
     validarFecha();
     ValidarHora();
 }
