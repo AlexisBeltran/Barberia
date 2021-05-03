@@ -21,8 +21,9 @@ function IniciarApp(){
     botonPaginador();
     MostrarResumen();
     nombreCita();
+    fechaCita();
     validarFecha();
-    DeshabilitarFecha();
+    ValidarHora();
 }
 
 function mostrarSeccion(){
@@ -190,7 +191,7 @@ function nombreCita(){
             ErrorNombre.classList.add('mensaje');
             setTimeout(() =>{
                 ErrorNombre.classList.remove('mensaje');
-            }, 8000);
+            }, 4000);
         }
         else{
             const Mensaje = document.querySelector('.mensaje');
@@ -200,6 +201,14 @@ function nombreCita(){
             Cita.nombre = nombreTexto;
             console.log(Cita);
         }
+    });
+}
+function fechaCita(){
+    const Fecha = document.querySelector('#fecha');
+    Fecha.addEventListener('input', e => {
+        const FechaSeleccionada = e.target.value;
+        Cita.fecha = FechaSeleccionada;
+        console.log(Cita);
     });
 }
 function mostrarAlerta(mensaje, tipo){
@@ -252,7 +261,24 @@ function validarFecha(){
         else{
             Cita.fecha = fecha.value;
         }
-
     });
+}
+function ValidarHora(){
+    const InputHora = document.querySelector('#hora');
+
+    InputHora.addEventListener('input', e =>{
+        const HoraCita = e.target.value;
+        const Hora = HoraCita.split(':');
+        if(Hora[0] >= '08' && Hora[0] <= '17'){
+            Cita.hora = HoraCita;
+        }
+        else{
+            mostrarAlerta('Hora no disponible', 'error');
+            setTimeout(() =>{
+                InputHora.value = ''; 
+            }, 3000);
+
+        }
+    });     
 }
 
