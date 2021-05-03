@@ -122,12 +122,10 @@ function seleccionarServicio(e){
 function eliminarServicio(id){
     const {servicio} = Cita;
     Cita.servicio = servicio.filter(Servicio => Servicio.id !== id);
-    console.log(Cita);
 }
 function agregarServicio(objetoServicio){
     const {servicio} = Cita;
     Cita.servicio = [...servicio, objetoServicio];
-    console.log(Cita);
 }
 
 function paginaSiguiente(){
@@ -157,6 +155,7 @@ function botonPaginador(){
     else if(Pagina === 3){
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.add('ocultar');
+        MostrarResumen();
     }
     else{
         paginaAnterior.classList.remove('ocultar');
@@ -169,13 +168,59 @@ function MostrarResumen(){
     //Destructuring
     const {nombre, fecha, hora, servicio } = Cita;
     const Resumen = document.querySelector('.mostrar-servicios');
+    
+    //Limpia el html Previo
+    while(Resumen.firstChild){
+        Resumen.removeChild(Resumen.firstChild);
+    }
     //Validacion del objeto
     if(Object.values(Cita).includes('')){
         const AdventenciaResumen = document.createElement('P');
         AdventenciaResumen.classList.add('invalidar-cita');
         AdventenciaResumen.textContent = 'Faltan datos de Servicio, Hora, Fecha o Nombre';
         Resumen.appendChild(AdventenciaResumen);
+
+        return;
     }
+    const ResumenTitulo = document.createElement('h2');
+    ResumenTitulo.textContent = 'Resumen de Cita';
+    Resumen.appendChild(ResumenTitulo);
+
+    const nombreCita = document.createElement('P');
+    nombreCita.innerHTML = `<span>Nombre: </span>${nombre}`;
+    Resumen.appendChild(nombreCita);
+
+    const fechaCita = document.createElement('P');
+    fechaCita.innerHTML = `<span>Fecha: </span>${fecha}`;
+    Resumen.appendChild(fechaCita);
+
+    const horaCita = document.createElement('P');
+    horaCita.innerHTML = `<span>Hora: </span>${hora}`;
+    Resumen.appendChild(horaCita);
+
+    const ResumenServicio = document.createElement('H2');
+    ResumenServicio.textContent = 'Resumen de Servicios';
+    Resumen.appendChild(ResumenServicio);
+
+    let Precio = 0;
+
+    servicio.forEach(Servicio =>{
+        const nombreServicio = document.createElement('P');
+        nombreServicio.textContent = Servicio.nombre;
+        const precioServicio = document.createElement('P');
+        precioServicio.innerHTML = `<span>Precio: </span>${Servicio.precio}`;
+        const Separador = document.createElement('hr');
+        Resumen.appendChild(nombreServicio);
+        Resumen.appendChild(precioServicio);
+        Resumen.appendChild(Separador);
+
+        const TotalServicio = Servicio.precio.split('$');
+        Precio += parseInt(TotalServicio[1].trim());
+    }); 
+    const TotalPagar = document.createElement('P');
+    TotalPagar.classList.add('derecha');
+    TotalPagar.innerHTML = `<span>Total a pagar: </span>$${Precio}`;
+    Resumen.appendChild(TotalPagar);
 }
 
 function nombreCita(){
@@ -199,7 +244,7 @@ function nombreCita(){
                 ErrorNombre.classList.remove('mensaje');
             }
             Cita.nombre = nombreTexto;
-            console.log(Cita);
+    
         }
     });
 }
@@ -208,7 +253,7 @@ function fechaCita(){
     Fecha.addEventListener('input', e => {
         const FechaSeleccionada = e.target.value;
         Cita.fecha = FechaSeleccionada;
-        console.log(Cita);
+
     });
 }
 function mostrarAlerta(mensaje, tipo){
@@ -265,7 +310,6 @@ function validarFecha(){
 }
 function ValidarHora(){
     const InputHora = document.querySelector('#hora');
-
     InputHora.addEventListener('input', e =>{
         const HoraCita = e.target.value;
         const Hora = HoraCita.split(':');
